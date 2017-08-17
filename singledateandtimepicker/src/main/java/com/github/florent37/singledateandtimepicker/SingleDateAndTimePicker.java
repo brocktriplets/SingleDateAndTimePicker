@@ -57,6 +57,8 @@ public class SingleDateAndTimePicker extends LinearLayout {
     private boolean displayMinutes = true;
     private boolean displayHours = true;
 
+    private boolean force24HourDisplay  = false;
+
     private boolean isAmPm;
     private int selectorHeight;
 
@@ -215,6 +217,13 @@ public class SingleDateAndTimePicker extends LinearLayout {
         updatePicker();
     }
 
+    public void setForce24HourDisplay( boolean value ) {
+        force24HourDisplay = value;
+        if ( force24HourDisplay ) {
+            setIsAmPm(false);
+        }
+    }
+
     public void setDayFormatter(SimpleDateFormat simpleDateFormat) {
         if (simpleDateFormat != null) {
             this.daysPicker.setDayFormatter(simpleDateFormat);
@@ -264,7 +273,7 @@ public class SingleDateAndTimePicker extends LinearLayout {
             if ( defaultDate != null ) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(defaultDate);
-                hoursPicker.setDefaultHour( calendar.get(Calendar.HOUR));
+                hoursPicker.setDefaultHour( calendar.get( Calendar.HOUR_OF_DAY ));
             }
 
         }

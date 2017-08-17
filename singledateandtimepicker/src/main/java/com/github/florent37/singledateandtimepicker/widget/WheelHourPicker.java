@@ -11,7 +11,7 @@ import java.util.List;
 public class WheelHourPicker extends WheelPicker {
 
     public static final int MIN_HOUR_DEFAULT = 0;
-    public static final int MAX_HOUR_DEFAULT = 23;
+    public static final int MAX_HOUR_DEFAULT = 24;
     public static final int MAX_HOUR_AM_PM = 12;
     public static final int STEP_HOURS_DEFAULT = 1;
 

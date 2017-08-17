@@ -34,6 +34,11 @@ public class MainActivityWithDoublePicker extends AppCompatActivity {
     TextView singleDateText;
 
 
+    @Bind(R.id.doubleTimeText)
+    TextView doubleTimeText;
+
+
+
 
     SimpleDateFormat simpleDateFormat;
     SimpleDateFormat simpleTimeFormat;
@@ -90,6 +95,10 @@ public class MainActivityWithDoublePicker extends AppCompatActivity {
                 .displayHours(true)
                 .displayMinutes(true)
                 .displayDays(false)
+
+                .minutesStep(30)
+
+                .force24HourDisplay(true)
 
                 .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
                     @Override
@@ -235,6 +244,54 @@ public class MainActivityWithDoublePicker extends AppCompatActivity {
                             stringBuilder.append(simpleDateFormat.format(date)).append("\n");
                         }
                         doubleText.setText(stringBuilder.toString());
+                    }
+                });
+        doubleBuilder.display();
+    }
+
+
+    @OnClick(R.id.doubleTimeOnlyLayout)
+    public void doubleTimeOnlyClicked() {
+
+        final Date now = new Date();
+        final Calendar calendarMin = Calendar.getInstance();
+        final Calendar calendarMax = Calendar.getInstance();
+
+        calendarMin.setTime(now); // Set min now
+        calendarMax.setTime(new Date(now.getTime() + TimeUnit.DAYS.toMillis(150))); // Set max now + 150 days
+
+        final Date minDate = calendarMin.getTime();
+        final Date maxDate = calendarMax.getTime();
+
+        doubleBuilder = new DoubleDateAndTimePickerDialog.Builder(this)
+                //.bottomSheet()
+                //.curved()
+
+                .backgroundColor(Color.BLACK)
+                .mainColor(Color.GREEN)
+                .minutesStep(15)
+                .mustBeOnFuture()
+
+
+
+                //.minDateRange(minDate)
+                //.maxDateRange(maxDate)
+                //.defaultDate(now)
+                .tab0Date(now)
+                .tab1Date(new Date(now.getTime() + TimeUnit.HOURS.toMillis(1)))
+
+                .title("Double Time")
+
+                .tab0Text("Start Time")
+                .tab1Text("End Time")
+                .listener(new DoubleDateAndTimePickerDialog.Listener() {
+                    @Override
+                    public void onDateSelected(List<Date> dates) {
+                        final StringBuilder stringBuilder = new StringBuilder();
+                        for (Date date : dates) {
+                            stringBuilder.append(simpleTimeFormat.format(date)).append("\n");
+                        }
+                        doubleTimeText.setText(stringBuilder.toString());
                     }
                 });
         doubleBuilder.display();

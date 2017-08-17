@@ -133,9 +133,11 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
             picker.selectDate(calendar);
         }
 
+        picker.setForce24HourDisplay(force24HourDisplay);
         picker.setDisplayDays(displayDays);
         picker.setDisplayMinutes(displayMinutes);
         picker.setDisplayHours(displayHours);
+
     }
 
     public SingleDateAndTimePickerDialog setListener(Listener listener) {
@@ -197,6 +199,11 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
         return this;
     }
 
+    public SingleDateAndTimePickerDialog setForce24HourDisplay(boolean value) {
+        this.force24HourDisplay = value;
+        return this;
+    }
+
     public SingleDateAndTimePickerDialog setDayFormatter(SimpleDateFormat dayFormatter) {
         this.dayFormatter = dayFormatter;
         return this;
@@ -250,6 +257,8 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
         private boolean displayDays = true;
         private boolean displayMinutes  = true;
         private boolean displayHours  = true;
+
+        private boolean force24HourDisplay  = false;
 
         @ColorInt
         @Nullable
@@ -357,6 +366,11 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
             return this;
         }
 
+        public Builder force24HourDisplay(boolean force24HourDisplay) {
+            this.force24HourDisplay = force24HourDisplay;
+            return this;
+        }
+
         public Builder setDayFormatter(SimpleDateFormat dayFormatter) {
             this.dayFormatter = dayFormatter;
             return this;
@@ -375,6 +389,7 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
                     .setDisplayMinutes(displayMinutes)
                     .setDisplayDays(displayDays)
                     .setDayFormatter(dayFormatter)
+                    .setForce24HourDisplay(force24HourDisplay)
                     .setMustBeOnFuture(mustBeOnFuture);
 
             if (mainColor != null) {
